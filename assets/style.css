@@ -921,7 +921,7 @@ body.subpage main > section:first-child{
   width:100%;height:100%;
   object-fit:cover;object-position:center 28%;
 }
-.store-photo--create img{object-position:15% 22%;}
+.store-photo--create img{object-position:15% 22%;filter:brightness(1.18);}
 .store-photo--plus img{object-position:25% 18%;}
 .store-photo-grad{
   position:absolute;inset:0;
