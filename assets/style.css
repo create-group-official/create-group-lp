@@ -1000,9 +1000,10 @@ body.subpage main > section:first-child{
   }
 }
 
-/* ===== TRUCK CINEMA（ヒーロー直下・横スライドバナー）=====
-   参考サイトの「GROUP RANKING」形式に寄せた、縦書きラベル＋横長バナー横スクロール。
-   中身は2026年8月〜実素材へ差し替え予定のプレースホルダー。 */
+/* ===== TRUCK CINEMA（ヒーロー直下・縦動画フィルムストリップ）=====
+   参考サイトの「GROUP RANKING」形式に寄せた、縦書きラベル＋縦長カード横スクロール。
+   2026-07-28：実際のCreate Cinema（縦動画3本）に差し替え済み。素材が縦(3:4系)のため
+   横長バナー用だったカードを縦長フィルムストリップに変更（design-standards適用）。 */
 .truckcinema{
   padding:1.5rem 0;
   background:
@@ -1048,22 +1049,18 @@ body.subpage main > section:first-child{
 .tc-slider::-webkit-scrollbar-thumb{background:var(--line);}
 .tc-slide{
   position:relative;
-  flex:0 0 88%;
-  aspect-ratio:16/9;
+  flex:0 0 62%;
+  aspect-ratio:3/4;
   scroll-snap-align:center;
   overflow:hidden;
   border:1px solid var(--line);
   background:var(--bg2);
 }
-.tc-slide img{
-  width:100%;height:100%;object-fit:cover;object-position:70% center;
+.tc-slide img,.tc-slide video{
+  width:100%;height:100%;object-fit:cover;object-position:center 30%;
   transition:filter .5s ease,transform .5s ease;
 }
-.tc-slide:hover img{filter:contrast(1.03) brightness(1.02);transform:scale(1.03);}
-/* 元素材が横長バナー(3:1)で片側が黒背景のため、人物が写る位置に個別でクロップ位置を調整 */
-.tc-slide:nth-child(1) img{object-position:72% center;}
-.tc-slide:nth-child(2) img{object-position:55% center;}
-.tc-slide:nth-child(3) img{object-position:22% center;}
+.tc-slide:hover img,.tc-slide:hover video{filter:contrast(1.03) brightness(1.02);transform:scale(1.03);}
 .tc-grad{
   position:absolute;inset:0;z-index:1;
   background:linear-gradient(to top,rgba(10,10,10,.9) 0%,rgba(10,10,10,.05) 50%,rgba(10,10,10,.35) 100%);
@@ -1098,7 +1095,7 @@ body.subpage main > section:first-child{
   .tc-label-en{font-size:1.35rem;}
   .tc-label-jp{font-size:.62rem;}
   .tc-slider{gap:14px;padding-right:4vw;}
-  .tc-slide{flex:0 0 58%;}
+  .tc-slide{flex:0 0 21%;}
   .truckcinema .swipe-hint{padding-right:4vw;}
   .philosophy-outro{padding:11rem 2rem;}
 }
