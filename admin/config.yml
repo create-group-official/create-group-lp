@@ -1,0 +1,122 @@
+backend:
+  name: github
+  repo: mahiro-jpn/create-group-lp
+  branch: main
+  base_url: https://cg-lp-cms-auth.mahiro-jpn.workers.dev
+  auth_endpoint: auth
+
+# ましろ・キイチのログイン画面に出るサイト名
+site_url: https://mahiro-jpn.github.io/create-group-lp/
+display_url: https://mahiro-jpn.github.io/create-group-lp/
+logo_url: https://mahiro-jpn.github.io/create-group-lp/LP_素材/logo_create_group.png
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+locale: "ja"
+
+collections:
+  - name: "news"
+    label: "お知らせ（News）"
+    files:
+      - name: "news"
+        label: "お知らせ一覧"
+        file: "content/news.json"
+        format: "json"
+        fields:
+          - { label: "お知らせ", name: "items", widget: "list", minimize_collapsed: true, summary: "{{title}}（{{date}}）", fields:
+              - { label: "日付", name: "date", widget: "date", format: "YYYY-MM-DD" }
+              - { label: "タイトル", name: "title", widget: "string" }
+              - { label: "本文", name: "body", widget: "text", required: false }
+              - { label: "リンク先URL（任意）", name: "link", widget: "string", required: false }
+            }
+
+  - name: "closeup"
+    label: "CLOSE-UP HOST（トップページ）"
+    files:
+      - name: "closeup"
+        label: "CLOSE-UPホスト写真"
+        file: "content/closeup.json"
+        format: "json"
+        fields:
+          - { label: "写真（4枚まで）", name: "items", widget: "list", minimize_collapsed: true, summary: "{{alt}}", fields:
+              - { label: "写真", name: "image", widget: "image", media_library: { config: { multiple: false } } }
+              - { label: "説明（alt・検索エンジン向け）", name: "alt", widget: "string", hint: "「CREATE GROUP クローズアップホスト Vol.01」のように具体的に書く" }
+            }
+
+  - name: "gallery"
+    label: "ギャラリー写真"
+    files:
+      - name: "gallery"
+        label: "ギャラリー一覧"
+        file: "content/gallery.json"
+        format: "json"
+        fields:
+          - { label: "写真", name: "items", widget: "list", minimize_collapsed: true, summary: "{{alt}}", fields:
+              - { label: "写真", name: "image", widget: "image" }
+              - { label: "説明（alt・検索エンジン向け）", name: "alt", widget: "string" }
+            }
+
+  - name: "shops"
+    label: "店舗情報"
+    files:
+      - name: "shops"
+        label: "CREATE / CREATE PLUS"
+        file: "content/shops.json"
+        format: "json"
+        fields:
+          - { label: "店舗", name: "items", widget: "list", minimize_collapsed: true, summary: "{{name}}", fields:
+              - { label: "内部ID（変更不可）", name: "id", widget: "string", read_only: true }
+              - { label: "店舗名", name: "name", widget: "string" }
+              - { label: "タグ（FLAGSHIP等）", name: "tag", widget: "string" }
+              - { label: "キャッチコピー", name: "catch", widget: "string" }
+              - { label: "紹介文", name: "copy", widget: "text" }
+              - { label: "営業時間", name: "hours", widget: "string" }
+              - { label: "電話番号（表示用）", name: "tel", widget: "string" }
+              - { label: "電話番号（発信用・ハイフン無し）", name: "tel_href", widget: "string" }
+              - { label: "住所", name: "address", widget: "string" }
+              - { label: "公式サイトURL", name: "official_url", widget: "string" }
+              - { label: "店舗写真", name: "photo", widget: "image" }
+              - { label: "ロゴ画像", name: "logo", widget: "image" }
+              - { label: "ロゴのalt文言", name: "logo_alt", widget: "string" }
+            }
+
+  - name: "recruit"
+    label: "求人情報"
+    files:
+      - name: "recruit"
+        label: "給与・待遇・FAQ"
+        file: "content/recruit.json"
+        format: "json"
+        fields:
+          - { label: "求人プラン（店舗別）", name: "plans", widget: "list", minimize_collapsed: true, summary: "{{name}}", fields:
+              - { label: "店舗ID（変更不可）", name: "shop_id", widget: "string", read_only: true }
+              - { label: "店舗名", name: "name", widget: "string" }
+              - { label: "タグ", name: "tag", widget: "string" }
+              - { label: "写真", name: "photo", widget: "image" }
+              - { label: "給与（表示文言）", name: "salary", widget: "text" }
+              - { label: "給与（数値・円/日、検索エンジン向け）", name: "salary_value", widget: "number", value_type: "int" }
+              - { label: "給与下限（数値・円/日）", name: "salary_min", widget: "number", value_type: "int" }
+              - { label: "勤務時間", name: "hours", widget: "string" }
+              - { label: "応募資格", name: "qualification", widget: "text" }
+              - { label: "育成・研修", name: "training", widget: "text" }
+              - { label: "待遇（任意）", name: "benefits", widget: "text", required: false }
+            }
+          - { label: "よくある質問（FAQ）", name: "faq", widget: "list", minimize_collapsed: true, summary: "{{q}}", fields:
+              - { label: "質問", name: "q", widget: "string" }
+              - { label: "回答", name: "a", widget: "text" }
+            }
+          - { label: "求人公開日", name: "job_posted_date", widget: "date", format: "YYYY-MM-DD" }
+          - { label: "求人有効期限", name: "job_valid_through", widget: "date", format: "YYYY-MM-DD" }
+
+  - name: "links"
+    label: "連絡先リンク（重要）"
+    files:
+      - name: "links"
+        label: "SNS・LINEリンク"
+        file: "content/links.json"
+        format: "json"
+        fields:
+          - { label: "Instagram URL", name: "instagram", widget: "string" }
+          - { label: "LINE（お客様相談窓口）URL", name: "line_consult", widget: "string", hint: "ここが壊れるとお客様からの相談窓口が全て機能しなくなります" }
+          - { label: "LINE（応募エントリー）URL", name: "line_entry", widget: "string", hint: "ここが壊れると求人応募が一切できなくなります" }

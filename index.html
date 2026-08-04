@@ -36,6 +36,7 @@
   ]
 }
 </script>
+<!-- CMS:jsonld-nightclubs:start -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,6 +89,7 @@
   "parentOrganization": {"@type": "Organization", "name": "CREATE GROUP"}
 }
 </script>
+<!-- CMS:jsonld-nightclubs:end -->
 </head>
 <body>
 <div class="world-bg" aria-hidden="true"></div>
@@ -107,7 +109,9 @@
     <a href="index.html#stores"><span class="nav-en">ShopList</span><span class="nav-ja">店舗一覧</span></a>
     <a href="recruit.html"><span class="nav-en">Recruit</span><span class="nav-ja">採用情報</span></a>
     <a href="#contact"><span class="nav-en">Contact</span><span class="nav-ja">お問い合わせ</span></a>
+    <!-- CMS:links:header-consult:start -->
     <a href="https://line.me/ti/p/a1uGkpyNCK" target="_blank" rel="noopener">お客様相談窓口</a>
+    <!-- CMS:links:header-consult:end -->
   </nav>
 </header>
 
@@ -160,7 +164,7 @@
 
   <div class="closeup-wrap reveal">
     <div class="closeup-grid" data-carousel>
-      <!-- ▼Vol.01は実写ホスト写真に差し替え済み（2026-07-12）。Vol.02以降はプレースホルダーのまま：写真・氏名が届き次第差し替え -->
+      <!-- CMS:closeup:start -->
       <figure class="cu-card">
         <img src="LP_素材/host_portrait_01.jpg" alt="CREATE GROUP クローズアップホスト Vol.01" loading="lazy">
         <div class="cu-grad"></div>
@@ -177,6 +181,7 @@
         <img src="LP_素材/5F8A1576 のコピー_0.jpg" alt="CREATE GROUP クローズアップホスト Vol.04" loading="lazy">
         <div class="cu-grad"></div>
       </figure>
+      <!-- CMS:closeup:end -->
     </div>
   </div>
 </section>
@@ -198,10 +203,14 @@
 <section class="news" id="news">
   <div class="inner chapter reveal">
     <span class="chapter-no">News &amp; Topics</span>
-    <p class="chapter-en">Coming <em>Soon.</em></p>
-    <h2 class="sec-title">最新情報は近日公開</h2>
     <span class="chapter-line"></span>
   </div>
+  <!-- CMS:news:start -->
+  <div class="inner chapter reveal">
+    <p class="chapter-en">Coming <em>Soon.</em></p>
+    <h2 class="sec-title">最新情報は近日公開</h2>
+  </div>
+  <!-- CMS:news:end -->
 </section>
 
 <!-- ===== SHOPLIST ===== -->
@@ -211,6 +220,7 @@
       <p class="chapter-en">Shop<em>List.</em></p>
     </div>
     <div class="store-cards reveal">
+      <!-- CMS:shops-teaser:start -->
       <a class="store-card store-card--rich" href="https://www.host2.jp/shop/create/" target="_blank" rel="noopener">
         <div class="store-photo store-photo--create">
           <img src="LP_素材/store_create_interior_host.jpg" alt="CREATE 店舗イメージ" loading="lazy">
@@ -243,6 +253,7 @@
           <div><dt>Address</dt><dd>名古屋市中区栄4-11-1 アイランドビル1F</dd></div>
         </dl>
       </a>
+      <!-- CMS:shops-teaser:end -->
       <div class="store-card">
         <span class="badge">COMING 2027</span>
         <img class="emblem-logo small" src="LP_素材/logo_create_group.png" alt="CREATE GROUP">
@@ -270,9 +281,11 @@
     <a class="recruit-banner reveal" href="recruit.html" aria-label="求人情報を見る">
       <img src="LP_素材/recruit_banner.jpg" alt="CREATE GROUP スタッフ募集">
     </a>
+    <!-- CMS:links:recruit-cta:start -->
     <div class="cta-row reveal">
       <a class="btn" href="https://line.me/ti/p/OmbUbtmaQm" target="_blank" rel="noopener">Entry ／ 応募する</a>
     </div>
+    <!-- CMS:links:recruit-cta:end -->
   </div>
 </section>
 
@@ -280,10 +293,12 @@
 <footer id="contact">
   <img class="emblem-logo small" src="LP_素材/logo_create_group.png" alt="CREATE GROUP">
   <p class="logotype">Create Group</p>
+  <!-- CMS:links:footer-sns:start -->
   <nav class="sns">
     <a href="https://www.instagram.com/create_group_/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://line.me/ti/p/a1uGkpyNCK" target="_blank" rel="noopener">LINE</a>
   </nav>
+  <!-- CMS:links:footer-sns:end -->
   <p class="copyright">&copy; 2026 CREATE GROUP. All Rights Reserved.</p>
 </footer>
 
