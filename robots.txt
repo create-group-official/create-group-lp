@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mahiro-jpn.github.io/create-group-lp/sitemap.xml
