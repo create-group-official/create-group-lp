@@ -2,7 +2,7 @@ backend:
   name: github
   repo: mahiro-jpn/create-group-lp
   branch: main
-  base_url: https://cg-lp-cms-auth.mahiro-jpn.workers.dev
+  base_url: https://cg-lp-cms-auth.mahironyasan.workers.dev
   auth_endpoint: auth
 
 # ましろ・キイチのログイン画面に出るサイト名
