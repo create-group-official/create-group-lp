@@ -5,7 +5,6 @@ backend:
   base_url: https://cg-lp-cms-auth.mahironyasan.workers.dev
   auth_endpoint: auth
 
-# ましろ・キイチのログイン画面に出るサイト名
 site_url: https://mahiro-jpn.github.io/create-group-lp/
 display_url: https://mahiro-jpn.github.io/create-group-lp/
 logo_url: https://mahiro-jpn.github.io/create-group-lp/LP_素材/logo_create_group.png
@@ -24,12 +23,16 @@ collections:
         file: "content/news.json"
         format: "json"
         fields:
-          - { label: "お知らせ", name: "items", widget: "list", minimize_collapsed: true, summary: "{{title}}（{{date}}）", fields:
+          - label: "お知らせ"
+            name: "items"
+            widget: "list"
+            minimize_collapsed: true
+            summary: "{{title}}（{{date}}）"
+            fields:
               - { label: "日付", name: "date", widget: "date", format: "YYYY-MM-DD" }
               - { label: "タイトル", name: "title", widget: "string" }
               - { label: "本文", name: "body", widget: "text", required: false }
               - { label: "リンク先URL（任意）", name: "link", widget: "string", required: false }
-            }
 
   - name: "closeup"
     label: "CLOSE-UP HOST（トップページ）"
@@ -39,10 +42,14 @@ collections:
         file: "content/closeup.json"
         format: "json"
         fields:
-          - { label: "写真（4枚まで）", name: "items", widget: "list", minimize_collapsed: true, summary: "{{alt}}", fields:
-              - { label: "写真", name: "image", widget: "image", media_library: { config: { multiple: false } } }
+          - label: "写真（4枚まで）"
+            name: "items"
+            widget: "list"
+            minimize_collapsed: true
+            summary: "{{alt}}"
+            fields:
+              - { label: "写真", name: "image", widget: "image" }
               - { label: "説明（alt・検索エンジン向け）", name: "alt", widget: "string", hint: "「CREATE GROUP クローズアップホスト Vol.01」のように具体的に書く" }
-            }
 
   - name: "gallery"
     label: "ギャラリー写真"
@@ -52,10 +59,14 @@ collections:
         file: "content/gallery.json"
         format: "json"
         fields:
-          - { label: "写真", name: "items", widget: "list", minimize_collapsed: true, summary: "{{alt}}", fields:
+          - label: "写真"
+            name: "items"
+            widget: "list"
+            minimize_collapsed: true
+            summary: "{{alt}}"
+            fields:
               - { label: "写真", name: "image", widget: "image" }
               - { label: "説明（alt・検索エンジン向け）", name: "alt", widget: "string" }
-            }
 
   - name: "shops"
     label: "店舗情報"
@@ -65,7 +76,12 @@ collections:
         file: "content/shops.json"
         format: "json"
         fields:
-          - { label: "店舗", name: "items", widget: "list", minimize_collapsed: true, summary: "{{name}}", fields:
+          - label: "店舗"
+            name: "items"
+            widget: "list"
+            minimize_collapsed: true
+            summary: "{{name}}"
+            fields:
               - { label: "内部ID（変更不可）", name: "id", widget: "string", read_only: true }
               - { label: "店舗名", name: "name", widget: "string" }
               - { label: "タグ（FLAGSHIP等）", name: "tag", widget: "string" }
@@ -79,7 +95,6 @@ collections:
               - { label: "店舗写真", name: "photo", widget: "image" }
               - { label: "ロゴ画像", name: "logo", widget: "image" }
               - { label: "ロゴのalt文言", name: "logo_alt", widget: "string" }
-            }
 
   - name: "recruit"
     label: "求人情報"
@@ -89,7 +104,12 @@ collections:
         file: "content/recruit.json"
         format: "json"
         fields:
-          - { label: "求人プラン（店舗別）", name: "plans", widget: "list", minimize_collapsed: true, summary: "{{name}}", fields:
+          - label: "求人プラン（店舗別）"
+            name: "plans"
+            widget: "list"
+            minimize_collapsed: true
+            summary: "{{name}}"
+            fields:
               - { label: "店舗ID（変更不可）", name: "shop_id", widget: "string", read_only: true }
               - { label: "店舗名", name: "name", widget: "string" }
               - { label: "タグ", name: "tag", widget: "string" }
@@ -101,11 +121,14 @@ collections:
               - { label: "応募資格", name: "qualification", widget: "text" }
               - { label: "育成・研修", name: "training", widget: "text" }
               - { label: "待遇（任意）", name: "benefits", widget: "text", required: false }
-            }
-          - { label: "よくある質問（FAQ）", name: "faq", widget: "list", minimize_collapsed: true, summary: "{{q}}", fields:
+          - label: "よくある質問（FAQ）"
+            name: "faq"
+            widget: "list"
+            minimize_collapsed: true
+            summary: "{{q}}"
+            fields:
               - { label: "質問", name: "q", widget: "string" }
               - { label: "回答", name: "a", widget: "text" }
-            }
           - { label: "求人公開日", name: "job_posted_date", widget: "date", format: "YYYY-MM-DD" }
           - { label: "求人有効期限", name: "job_valid_through", widget: "date", format: "YYYY-MM-DD" }
 
