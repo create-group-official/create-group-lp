@@ -1,20 +1,20 @@
 {
   "items": [
     {
-      "image": "LP_素材/host_portrait_01.jpg",
-      "alt": "CREATE GROUP クローズアップホスト Vol.01"
+      "image": "LP_素材/host_harubo.jpg",
+      "alt": "CREATE GROUP クローズアップホスト Harubo"
     },
     {
-      "image": "LP_素材/5F8A1524 のコピー_0.jpg",
-      "alt": "CREATE GROUP クローズアップホスト Vol.02"
+      "image": "LP_素材/host_kairi.jpg",
+      "alt": "CREATE GROUP クローズアップホスト Kairi"
     },
     {
-      "image": "LP_素材/5F8A1566 のコピー_0.jpg",
-      "alt": "CREATE GROUP クローズアップホスト Vol.03"
+      "image": "LP_素材/host_rui.jpg",
+      "alt": "CREATE GROUP クローズアップホスト Rui"
     },
     {
-      "image": "LP_素材/5F8A1576 のコピー_0.jpg",
-      "alt": "CREATE GROUP クローズアップホスト Vol.04"
+      "image": "LP_素材/host_ryoto.jpg",
+      "alt": "CREATE GROUP クローズアップホスト Ryoto"
     }
   ]
 }
