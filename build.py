@@ -382,6 +382,10 @@ def main():
 
     shutil.copytree(LP_DIR / "assets", DIST_DIR / "assets")
 
+    admin_src = LP_DIR / "admin"
+    if admin_src.exists():
+        shutil.copytree(admin_src, DIST_DIR / "admin")
+
     material_src = LP_DIR / "LP_素材"
     if material_src.exists():
         shutil.copytree(material_src, DIST_DIR / "LP_素材", symlinks=False)
