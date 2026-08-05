@@ -296,11 +296,11 @@ def render_jsonld_recruit(recruit):
 
 def build_marker_renderers():
     links = load_json("links")
-    shops = load_json("shops")
+    shops = load_json("shops")["items"]
     recruit = load_json("recruit")
-    news = load_json("news")
-    closeup = load_json("closeup")
-    gallery = load_json("gallery")
+    news = load_json("news")["items"]
+    closeup = load_json("closeup")["items"]
+    gallery = load_json("gallery")["items"]
     return {
         "links:header-consult": render_links_header_consult(links),
         "links:footer-sns": render_links_footer_sns(links),

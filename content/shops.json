@@ -1,32 +1,34 @@
-[
-  {
-    "id": "create",
-    "name": "CREATE",
-    "tag": "FLAGSHIP",
-    "catch": "信念を継承する男たち",
-    "copy": "静かな熱を秘めた男たちが、あなたの夜に火を灯す。広い空間とハイレベルな接客で味わう、特別な夜。",
-    "hours": "20:00 – 25:00（月曜定休）",
-    "tel": "052-222-7222",
-    "tel_href": "0522227222",
-    "address": "名古屋市中区栄4-10-2 第6オーシャンビル4F",
-    "official_url": "https://www.host2.jp/shop/create/",
-    "photo": "LP_素材/store_create_interior_host.jpg",
-    "logo": "LP_素材/logo_create_group.png",
-    "logo_alt": "CREATE GROUP"
-  },
-  {
-    "id": "plus",
-    "name": "CREATE PLUS",
-    "tag": "SECOND",
-    "catch": "未来を創る男たち",
-    "copy": "無邪気な笑顔の奥に潜む、挑発的な言葉と甘い罠。今夜、あなたの心をさらっていく。",
-    "hours": "20:00 – 00:30（完全週休2日制）",
-    "tel": "052-212-5661",
-    "tel_href": "0522125661",
-    "address": "名古屋市中区栄4-11-1 アイランドビル1F",
-    "official_url": "https://www.host2.jp/shop/createplus/",
-    "photo": "LP_素材/store_createplus_interior_host.jpg",
-    "logo": "LP_素材/logo_create_plus.png",
-    "logo_alt": "CREATE PLUS"
-  }
-]
+{
+  "items": [
+    {
+      "id": "create",
+      "name": "CREATE",
+      "tag": "FLAGSHIP",
+      "catch": "信念を継承する男たち",
+      "copy": "静かな熱を秘めた男たちが、あなたの夜に火を灯す。広い空間とハイレベルな接客で味わう、特別な夜。",
+      "hours": "20:00 – 25:00（月曜定休）",
+      "tel": "052-222-7222",
+      "tel_href": "0522227222",
+      "address": "名古屋市中区栄4-10-2 第6オーシャンビル4F",
+      "official_url": "https://www.host2.jp/shop/create/",
+      "photo": "LP_素材/store_create_interior_host.jpg",
+      "logo": "LP_素材/logo_create_group.png",
+      "logo_alt": "CREATE GROUP"
+    },
+    {
+      "id": "plus",
+      "name": "CREATE PLUS",
+      "tag": "SECOND",
+      "catch": "未来を創る男たち",
+      "copy": "無邪気な笑顔の奥に潜む、挑発的な言葉と甘い罠。今夜、あなたの心をさらっていく。",
+      "hours": "20:00 – 00:30（完全週休2日制）",
+      "tel": "052-212-5661",
+      "tel_href": "0522125661",
+      "address": "名古屋市中区栄4-11-1 アイランドビル1F",
+      "official_url": "https://www.host2.jp/shop/createplus/",
+      "photo": "LP_素材/store_createplus_interior_host.jpg",
+      "logo": "LP_素材/logo_create_plus.png",
+      "logo_alt": "CREATE PLUS"
+    }
+  ]
+}

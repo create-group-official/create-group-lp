@@ -1,16 +1,60 @@
-[
-  { "image": "LP_素材/5F8A1472-復元_0.jpg", "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、フェンス越しのポートレート" },
-  { "image": "LP_素材/5F8A1492 のコピー_0.jpg", "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、階段前でのポーズ" },
-  { "image": "LP_素材/5F8A1510 のコピー_0.jpg", "alt": "CREATE GROUP ギャラリー：Harley-Davidsonレザージャケットのホスト、クローズアップ" },
-  { "image": "LP_素材/5F8A1532 のコピー_0.jpg", "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、駐車場での全身ショット" },
-  { "image": "LP_素材/5F8A1549 のコピー_0.jpg", "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、しゃがみポーズ" },
-  { "image": "LP_素材/5F8A1573 のコピー_0.jpg", "alt": "CREATE GROUP ギャラリー：ホスト2人、駐車場でのツーショット" },
-  { "image": "LP_素材/ai_generated/ride_mask_motorcycle.png", "alt": "CREATE GROUP ギャラリー：バイクにまたがるマスク姿のアートビジュアル" },
-  { "image": "LP_素材/ai_generated/gallery_mask_walking.png", "alt": "CREATE GROUP ギャラリー：白マスク・黒コートのランウェイ風アートビジュアル" },
-  { "image": "LP_素材/host_portrait_02.jpg", "alt": "CREATE GROUP ギャラリー：ブラウンジャケットのホストポートレート" },
-  { "image": "LP_素材/host_portrait_03.jpg", "alt": "CREATE GROUP ギャラリー：黒髪ウェットヘアのホスト、サイドプロファイル" },
-  { "image": "LP_素材/host_portrait_04.jpg", "alt": "CREATE GROUP ギャラリー：黒ベルベットスーツのホストポートレート" },
-  { "image": "LP_素材/host_portrait_05.jpg", "alt": "CREATE GROUP ギャラリー：金髪・ブラックスーツのホスト、レッドカーテン背景" },
-  { "image": "LP_素材/host_portrait_06.jpg", "alt": "CREATE GROUP ギャラリー：ピンストライプスーツのホスト、館内でのポートレート" },
-  { "image": "LP_素材/host_portrait_07.jpg", "alt": "CREATE GROUP ギャラリー：スケートボードに座るホスト、ストリートスタイル" }
-]
+{
+  "items": [
+    {
+      "image": "LP_素材/5F8A1472-復元_0.jpg",
+      "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、フェンス越しのポートレート"
+    },
+    {
+      "image": "LP_素材/5F8A1492 のコピー_0.jpg",
+      "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、階段前でのポーズ"
+    },
+    {
+      "image": "LP_素材/5F8A1510 のコピー_0.jpg",
+      "alt": "CREATE GROUP ギャラリー：Harley-Davidsonレザージャケットのホスト、クローズアップ"
+    },
+    {
+      "image": "LP_素材/5F8A1532 のコピー_0.jpg",
+      "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、駐車場での全身ショット"
+    },
+    {
+      "image": "LP_素材/5F8A1549 のコピー_0.jpg",
+      "alt": "CREATE GROUP ギャラリー：レーシングジャケットのホスト、しゃがみポーズ"
+    },
+    {
+      "image": "LP_素材/5F8A1573 のコピー_0.jpg",
+      "alt": "CREATE GROUP ギャラリー：ホスト2人、駐車場でのツーショット"
+    },
+    {
+      "image": "LP_素材/ai_generated/ride_mask_motorcycle.png",
+      "alt": "CREATE GROUP ギャラリー：バイクにまたがるマスク姿のアートビジュアル"
+    },
+    {
+      "image": "LP_素材/ai_generated/gallery_mask_walking.png",
+      "alt": "CREATE GROUP ギャラリー：白マスク・黒コートのランウェイ風アートビジュアル"
+    },
+    {
+      "image": "LP_素材/host_portrait_02.jpg",
+      "alt": "CREATE GROUP ギャラリー：ブラウンジャケットのホストポートレート"
+    },
+    {
+      "image": "LP_素材/host_portrait_03.jpg",
+      "alt": "CREATE GROUP ギャラリー：黒髪ウェットヘアのホスト、サイドプロファイル"
+    },
+    {
+      "image": "LP_素材/host_portrait_04.jpg",
+      "alt": "CREATE GROUP ギャラリー：黒ベルベットスーツのホストポートレート"
+    },
+    {
+      "image": "LP_素材/host_portrait_05.jpg",
+      "alt": "CREATE GROUP ギャラリー：金髪・ブラックスーツのホスト、レッドカーテン背景"
+    },
+    {
+      "image": "LP_素材/host_portrait_06.jpg",
+      "alt": "CREATE GROUP ギャラリー：ピンストライプスーツのホスト、館内でのポートレート"
+    },
+    {
+      "image": "LP_素材/host_portrait_07.jpg",
+      "alt": "CREATE GROUP ギャラリー：スケートボードに座るホスト、ストリートスタイル"
+    }
+  ]
+}
