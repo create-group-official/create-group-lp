@@ -29,7 +29,7 @@ collections:
             minimize_collapsed: true
             summary: "{{title}}（{{date}}）"
             fields:
-              - { label: "日付", name: "date", widget: "date", format: "YYYY-MM-DD" }
+              - { label: "日付", name: "date", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
               - { label: "タイトル", name: "title", widget: "string" }
               - { label: "本文", name: "body", widget: "text", required: false }
               - { label: "リンク先URL（任意）", name: "link", widget: "string", required: false }
@@ -129,8 +129,8 @@ collections:
             fields:
               - { label: "質問", name: "q", widget: "string" }
               - { label: "回答", name: "a", widget: "text" }
-          - { label: "求人公開日", name: "job_posted_date", widget: "date", format: "YYYY-MM-DD" }
-          - { label: "求人有効期限", name: "job_valid_through", widget: "date", format: "YYYY-MM-DD" }
+          - { label: "求人公開日", name: "job_posted_date", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
+          - { label: "求人有効期限", name: "job_valid_through", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
 
   - name: "links"
     label: "連絡先リンク（重要）"
