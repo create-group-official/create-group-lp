@@ -42,11 +42,13 @@ collections:
         file: "content/closeup.json"
         format: "json"
         fields:
-          - label: "写真（4枚まで）"
+          - label: "写真（2枚固定）"
             name: "items"
             widget: "list"
             minimize_collapsed: true
             summary: "{{alt}}"
+            min: 2
+            max: 2
             fields:
               - { label: "写真", name: "image", widget: "image" }
               - { label: "説明（alt・検索エンジン向け）", name: "alt", widget: "string", hint: "「CREATE GROUP クローズアップホスト Vol.01」のように具体的に書く" }
