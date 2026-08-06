@@ -1,13 +1,13 @@
 backend:
   name: github
-  repo: mahiro-jpn/create-group-lp
+  repo: create-group-official/create-group-lp
   branch: main
   base_url: https://cg-lp-cms-auth.mahironyasan.workers.dev
   auth_endpoint: auth
 
-site_url: https://mahiro-jpn.github.io/create-group-lp/
-display_url: https://mahiro-jpn.github.io/create-group-lp/
-logo_url: https://mahiro-jpn.github.io/create-group-lp/LP_素材/logo_create_group.png
+site_url: https://create-group-official.github.io/create-group-lp/
+display_url: https://create-group-official.github.io/create-group-lp/
+logo_url: https://create-group-official.github.io/create-group-lp/LP_素材/logo_create_group.png
 
 media_folder: "uploads"
 public_folder: "/uploads"

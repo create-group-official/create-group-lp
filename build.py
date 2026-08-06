@@ -226,7 +226,7 @@ def render_jsonld_nightclubs(shops):
             "@context": "https://schema.org",
             "@type": "NightClub",
             "name": s["name"],
-            "url": "https://mahiro-jpn.github.io/create-group-lp/shoplist.html",
+            "url": "https://create-group-official.github.io/create-group-lp/shoplist.html",
             "sameAs": ["https://www.instagram.com/create_group_/"],
             "telephone": s["tel"],
             "address": {
@@ -272,7 +272,7 @@ def render_jsonld_recruit(recruit):
             "hiringOrganization": {
                 "@type": "Organization",
                 "name": p["name"],
-                "sameAs": "https://mahiro-jpn.github.io/create-group-lp/shoplist.html",
+                "sameAs": "https://create-group-official.github.io/create-group-lp/shoplist.html",
             },
             "jobLocation": {
                 "@type": "Place",
