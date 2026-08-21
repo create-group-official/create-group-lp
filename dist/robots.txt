@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://create-group-official.github.io/create-group-lp/sitemap.xml
