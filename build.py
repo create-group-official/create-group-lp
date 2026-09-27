@@ -28,6 +28,10 @@ CONTENT_DIR = LP_DIR / "content"
 UPLOADS_DIR = LP_DIR / "uploads"
 DIST_DIR = LP_DIR / "dist"
 
+# GitHub Pages: dist/ ごと公開されるため、CNAME も dist/ に置かないと
+# デプロイのたびに独自ドメイン設定が外れる。
+CUSTOM_DOMAIN = "create-group.co"
+
 MAX_IMAGE_WIDTH = 1600
 MAX_IMAGE_BYTES = 500_000
 
@@ -226,7 +230,7 @@ def render_jsonld_nightclubs(shops):
             "@context": "https://schema.org",
             "@type": "NightClub",
             "name": s["name"],
-            "url": "https://create-group-official.github.io/create-group-lp/shoplist.html",
+            "url": "https://create-group.co/shoplist.html",
             "sameAs": ["https://www.instagram.com/create_group_/"],
             "telephone": s["tel"],
             "address": {
@@ -272,7 +276,7 @@ def render_jsonld_recruit(recruit):
             "hiringOrganization": {
                 "@type": "Organization",
                 "name": p["name"],
-                "sameAs": "https://create-group-official.github.io/create-group-lp/shoplist.html",
+                "sameAs": "https://create-group.co/shoplist.html",
             },
             "jobLocation": {
                 "@type": "Place",
@@ -399,6 +403,8 @@ def main():
                 dest = dist_uploads / rel
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 compress_image(f, dest)
+
+    (DIST_DIR / "CNAME").write_text(CUSTOM_DOMAIN + "\n", encoding="utf-8")
 
     print(f"[DONE] dist/ に生成完了: {DIST_DIR}")
 
