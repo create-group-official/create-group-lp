@@ -137,6 +137,49 @@ if(reduced){
   });
 })();
 
+// CREATE CINEMA / ヒーローの動画ライトボックス（クリックで音ありフル再生）
+(function(){
+  const box = document.getElementById('vlightbox');
+  const triggers = [...document.querySelectorAll('[data-film]')];
+  if(!box || !triggers.length) return;
+
+  const video = box.querySelector('.vlightbox-video');
+  const title = box.querySelector('.vlightbox-title');
+  const closeBtn = box.querySelector('.vlightbox-close');
+  let lastFocus = null;
+
+  function open(src, label, trigger){
+    lastFocus = trigger;
+    video.src = src;
+    video.currentTime = 0;
+    title.textContent = label || '';
+    box.classList.add('open');
+    box.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    video.play().catch(()=>{});   // 自動再生が拒否されてもコントロールから再生できる
+  }
+  function close(){
+    video.pause();
+    box.classList.remove('open');
+    box.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    video.removeAttribute('src');
+    video.load();
+    if(lastFocus) lastFocus.focus();
+  }
+
+  triggers.forEach(t=> t.addEventListener('click', (e)=>{
+    e.preventDefault();
+    open(t.dataset.film, t.dataset.filmTitle, t);
+  }));
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', (e)=>{ if(e.target === box) close(); });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && box.classList.contains('open')) close();
+  });
+})();
+
 // カルーセルのドットインジケーター（横スクロールの現在位置を可視化）
 document.querySelectorAll('[data-carousel]').forEach(track=>{
   const items = [...track.children];

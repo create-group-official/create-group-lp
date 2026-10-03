@@ -118,10 +118,15 @@
 <!-- ===== HERO ===== -->
 <header class="hero">
   <h1 class="sr-only">CREATE GROUP（クリエイトグループ）— 名古屋・栄のホストクラブ。CREATE／CREATE PLUS運営。</h1>
-  <video autoplay muted loop playsinline poster="LP_素材/hero_make_the_light_poster.jpg">
-    <source src="LP_素材/hero_make_the_light.mp4" type="video/mp4">
+  <video autoplay muted loop playsinline poster="LP_素材/hero_rise_poster.jpg">
+    <source src="LP_素材/hero_rise.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
+  <button class="hero-play" type="button"
+          data-film="LP_素材/cinema/cinema_05_rise.mp4"
+          data-film-title="2026.10 — RISE">
+    <span class="hero-play-tri" aria-hidden="true"></span>WATCH FILM
+  </button>
   <div class="scroll-cue"><span class="arrow"></span>SCROLL</div>
 </header>
 
@@ -140,21 +145,44 @@
             <source src="LP_素材/cinema/cinema_01_previous.mp4" type="video/mp4">
           </video>
           <div class="tc-grad"></div>
-          <div class="tc-cap"><div class="tc-idx">Cut — 01</div></div>
+          <div class="tc-cap"><div class="tc-idx">Cut — 01</div><div class="tc-title">VISION</div></div>
+          <button class="tc-play" type="button"
+                  data-film="LP_素材/cinema/cinema_01_previous_full.mp4"
+                  data-film-title="VISION"
+                  aria-label="VISION を再生"><span aria-hidden="true"></span></button>
         </figure>
         <figure class="tc-slide">
           <video autoplay muted loop playsinline poster="LP_素材/cinema/cinema_02_bike_poster.jpg">
             <source src="LP_素材/cinema/cinema_02_bike.mp4" type="video/mp4">
           </video>
           <div class="tc-grad"></div>
-          <div class="tc-cap"><div class="tc-idx">Cut — 02</div></div>
+          <div class="tc-cap"><div class="tc-idx">Cut — 02</div><div class="tc-title">BIKE CAMPAIGN</div></div>
+          <button class="tc-play" type="button"
+                  data-film="LP_素材/cinema/cinema_02_bike.mp4"
+                  data-film-title="BIKE CAMPAIGN"
+                  aria-label="BIKE CAMPAIGN を再生"><span aria-hidden="true"></span></button>
         </figure>
         <figure class="tc-slide">
           <video autoplay muted loop playsinline poster="LP_素材/cinema/cinema_03_encounter_poster.jpg">
             <source src="LP_素材/cinema/cinema_03_encounter.mp4" type="video/mp4">
           </video>
           <div class="tc-grad"></div>
-          <div class="tc-cap"><div class="tc-idx">Cut — 03</div></div>
+          <div class="tc-cap"><div class="tc-idx">Cut — 03</div><div class="tc-title">2026.07</div></div>
+          <button class="tc-play" type="button"
+                  data-film="LP_素材/cinema/cinema_03_encounter.mp4"
+                  data-film-title="2026.07"
+                  aria-label="2026.07 のフィルムを再生"><span aria-hidden="true"></span></button>
+        </figure>
+        <figure class="tc-slide">
+          <video autoplay muted loop playsinline poster="LP_素材/cinema/cinema_04_make_the_light_poster.jpg">
+            <source src="LP_素材/cinema/cinema_04_make_the_light.mp4" type="video/mp4">
+          </video>
+          <div class="tc-grad"></div>
+          <div class="tc-cap"><div class="tc-idx">Cut — 04</div><div class="tc-title">2026.08 MAKE THE LIGHT</div></div>
+          <button class="tc-play" type="button"
+                  data-film="LP_素材/cinema/cinema_04_make_the_light.mp4"
+                  data-film-title="2026.08 — MAKE THE LIGHT"
+                  aria-label="MAKE THE LIGHT を再生"><span aria-hidden="true"></span></button>
         </figure>
       </div>
       <p class="swipe-hint">— SWIPE —</p>
@@ -296,6 +324,15 @@
     <!-- CMS:links:recruit-cta:end -->
   </div>
 </section>
+
+<!-- ===== 動画ライトボックス（CREATE CINEMAとヒーローから開く・音あり）===== -->
+<div class="vlightbox" id="vlightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="フィルム再生">
+  <button class="vlightbox-close" type="button" aria-label="閉じる">&times;</button>
+  <div class="vlightbox-stage">
+    <video class="vlightbox-video" controls playsinline preload="none"></video>
+    <p class="vlightbox-title"></p>
+  </div>
+</div>
 
 <!-- ===== FOOTER ===== -->
 <footer id="contact">
