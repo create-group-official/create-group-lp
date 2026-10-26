@@ -51,6 +51,36 @@ addEventListener('pageshow', (e)=>{
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// 店舗紹介文（CMS管理＝HTMLに改行を書けない）を文の切れ目で組み直す。
+// 「。」ごとに1行、「、」ごとに折り返し単位を作り、語の途中で改行されないようにする
+document.querySelectorAll('.store-copy').forEach(el=>{
+  const text = el.textContent.trim();
+  if(!text) return;
+  el.textContent = '';
+  (text.match(/[^。！？]+[。！？]?/g) || []).forEach(sentence=>{
+    const line = document.createElement('span');
+    line.className = 'ph-line';
+    (sentence.match(/[^、]+、?/g) || []).forEach(phrase=>{
+      // 狭い画面で1句が1行に収まらない場合に備え、長い句は中央に近い助詞の後ろでも折れるようにする
+      let parts = [phrase];
+      if(phrase.length > 15){
+        let best = -1;
+        for(let i = 3; i < phrase.length - 3; i++){
+          if('でをにとがはへも'.includes(phrase[i]) && (best < 0 || Math.abs(i - phrase.length/2) < Math.abs(best - phrase.length/2))) best = i;
+        }
+        if(best > 0) parts = [phrase.slice(0, best + 1), phrase.slice(best + 1)];
+      }
+      parts.forEach(p=>{
+        const ph = document.createElement('span');
+        ph.className = 'ph';
+        ph.textContent = p;
+        line.appendChild(ph);
+      });
+    });
+    el.appendChild(line);
+  });
+});
+
 // スクロールで要素をフェードイン
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
@@ -247,14 +277,15 @@ document.querySelectorAll('[data-carousel]').forEach(track=>{
   update();
 })();
 
-// カーソル追従の金パーティクル（PC・ホバー可能デバイスのみ。アイドル時はrAF停止）
+// カーソル追従の灰と残り火（PC・ホバー可能デバイスのみ。アイドル時はrAF停止）
+// 2026-10-26 ダークアート改修で金粒子から変更。クラス名 gold-particles は既存CSSのため据え置き
 (function(){
   const enable = matchMedia('(min-width:768px)').matches
               && matchMedia('(hover:hover)').matches
               && !reduced;
   if(!enable) return;
 
-  const COLORS = ['#c4974a', '#e8c57a', '#f3ede0'];
+  const COLORS = ['#8e8e95', '#c9c9cf', '#5f5f66', '#b76e4d'];
   const MAX = 60;
 
   const canvas = document.createElement('canvas');

@@ -1,6 +1,7 @@
 :root{
-  --bg:#18150f;
-  --bg2:#221d16;
+  /* 2026-10-26 ダークアート改修：暖色の焦茶から、無彩色の黒へ */
+  --bg:#08080a;
+  --bg2:#111114;
   --fg:#f5f5f5;
   --gray:#8a8a8a;
   --line:#2c2c2c;
@@ -370,11 +371,20 @@ section{padding:1.5rem 1.5rem;position:relative;}
 }
 
 /* ===== 世界観の通奏低音（ページ全体固定・1枚のみ） ===== */
+/* 2026-10-26：ギリシャ柱を廃止。下地用のダークアート画像が届くまでは、SVGノイズで作った煙で代用 */
 .world-bg{
   position:fixed;inset:0;z-index:-1;
-  background:url("../LP_素材/greek_bg/greek_columns_bw.jpg") center 30%/cover no-repeat;
-  filter:grayscale(100%) brightness(.5) contrast(1.05);
+  background:
+    radial-gradient(ellipse 70% 45% at 18% 28%,rgba(150,150,160,.10),transparent 70%),
+    radial-gradient(ellipse 60% 40% at 86% 72%,rgba(140,140,150,.08),transparent 70%),
+    #060608;
   pointer-events:none;
+}
+.world-bg::after{
+  content:"";
+  position:absolute;inset:0;
+  opacity:.5;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='1400'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.0035 0.006' numOctaves='5' seed='11'/><feColorMatrix values='0 0 0 0 .78  0 0 0 0 .78  0 0 0 0 .8  0 0 0 2.2 -1.15'/></filter><rect width='100%25' height='100%25' filter='url(%23s)'/></svg>") center/cover no-repeat;
 }
 .gallery,.ride,.closeup,.stores,footer{position:relative;}
 .gallery .chapter,.gallery .plate,.gallery .slider-wrap,
@@ -703,11 +713,16 @@ a.store-card:hover{border-color:var(--gold-soft);}
   position:relative;
   overflow:hidden;
 }
+/* 2026-10-26：光の漏れる扉（エソラのイメージ案から文字を除去した素材）。
+   セクション全体には敷かず上部に置き、下端を黒へ溶かす。PCでは幅を絞り左右も溶かす */
 .recruit-bg{
-  position:absolute;left:0;right:0;top:-12%;
-  height:124%;
-  background:url("../LP_素材/greek_bg/greek_columns_bw.jpg") center/cover no-repeat;
-  filter:grayscale(100%) brightness(.22) contrast(1.06);
+  position:absolute;top:0;left:0;right:0;
+  margin:0 auto;
+  width:min(100%,640px);
+  aspect-ratio:852/1741;
+  background:url("../LP_素材/darkart/recruit_door.jpg") center top/cover no-repeat;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,#000 72%,transparent 100%);
   will-change:transform;
 }
 .recruit .inner{position:relative;z-index:2;}
@@ -1187,4 +1202,250 @@ body.subpage main > section:first-child{
   .tc-slide{flex:0 0 21%;}
   .truckcinema .swipe-hint{padding-right:4vw;}
   .philosophy-outro{padding:11rem 2rem;}
+}
+
+/* =====================================================================
+   DARK ART（2026-10-26 エソラ依頼：厨二病×ダークアート、改行に余韻）
+   イメージ案3枚（Downloads/20904〜20906_0.jpg）準拠。
+   - 見出し：銅色アクセント → 銀のメタリック（Recruitだけローズゴールド）
+   - 銅色は「線」に限定（小見出し下の罫線・縦線・Entry）
+   - 本文：意味の切れ目で改行し、連の間を大きく空ける
+   ===================================================================== */
+:root{
+  --chrome:linear-gradient(180deg,#ffffff 0%,#e6e6ea 28%,#a9aab0 47%,#6c6d73 53%,#c4c5ca 68%,#f3f3f5 84%,#b4b5ba 100%);
+  --rose:linear-gradient(180deg,#fff2ea 0%,#f1cfbb 28%,#cb9276 47%,#8a5038 53%,#d7a389 68%,#f7ddcd 84%,#bb826b 100%);
+  --ash:#bcbcc2;
+  --rule-soft:rgba(205,205,212,.16);
+}
+
+/* --- 読ませる日本語は明朝（しっぽり明朝・2026-10-26 キイチ選定）。
+   ナビ・住所・営業時間・FAQなどの情報はゴシックのまま --- */
+:root{--mincho:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;}
+.sec-title,.statement-tagline,.recruit-copy,.recruit-sub,.recruit-story,
+.store-catch,.store-copy,.plate-cap .jp,.guest-copy{font-family:var(--mincho);font-weight:400;}
+.store-catch{font-weight:500;}
+
+/* --- 見出し：銀のメタリック --- */
+.chapter-en,
+.plate-cap .en{
+  background-image:var(--chrome);
+  -webkit-background-clip:text;
+          background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  text-shadow:none;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.85)) drop-shadow(0 10px 22px rgba(0,0,0,.7));
+}
+.chapter-en em,
+.plate-cap .en em{
+  background-image:var(--chrome);
+  -webkit-background-clip:text;
+          background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none;
+}
+.recruit .chapter-en em{background-image:var(--rose);display:inline-block;white-space:nowrap;}
+
+/* --- 小見出し：字間を広げ、下に銅の罫線 --- */
+.chapter-no{
+  font-size:.8rem;
+  letter-spacing:min(.58em,1.9vw);   /* 320px幅で2行に折れないように */
+  text-indent:min(.58em,1.9vw);
+  color:var(--ash);
+  margin-bottom:1.5rem;
+}
+.chapter-no::after{
+  content:"";
+  display:block;
+  width:112px;height:1px;
+  margin:1.4rem auto 0;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+}
+.chapter-no:has(+ .chapter-line)::after{display:none;}
+.recruit .chapter-no{color:var(--gold-bright);}
+.chapter-line{height:44px;margin-top:1.4rem;}
+
+/* --- ヘッダーのロゴ文字も銀へ。ナビ（PCの帯・モバイルのドロップダウン）もベージュから黒へ --- */
+.site-brand-en{color:#dcdce0;}
+.site-brand{background:rgba(6,6,8,.84);}
+.site-nav{background:rgba(8,8,10,.94);border-top:1px solid rgba(255,255,255,.06);}
+.site-nav a{color:#cfcfd4;border-bottom-color:rgba(255,255,255,.06);}
+.site-nav a:hover{color:#fff;}
+
+/* --- セクションの下地：金のもやを廃止し、背景のダークアートを透かす --- */
+.truckcinema,.closeup,.gallery,.stores{
+  background:linear-gradient(to bottom,rgba(6,6,8,.78),rgba(6,6,8,.52) 50%,rgba(6,6,8,.78));
+}
+.gallery::before,.closeup::before,.stores::before,.recruit::before,.truckcinema::before{
+  background:linear-gradient(to right,transparent,var(--rule-soft),transparent);
+}
+footer{background:rgba(5,5,7,.92);border-top-color:rgba(255,255,255,.06);}
+
+/* --- CREATE CINEMA：縦書きラベルを正立の銀文字に、下へ細い線 --- */
+.tc-label-en{
+  font-style:normal;font-weight:400;
+  letter-spacing:.42em;
+  color:var(--ash);
+}
+.tc-label::after{
+  content:"";
+  display:block;
+  width:1px;height:64px;
+  background:linear-gradient(to bottom,var(--ash),transparent);
+}
+.tc-title{font-size:.8rem;letter-spacing:.2em;color:#ececf0;margin-top:.5rem;}
+.swipe-hint{color:var(--ash);letter-spacing:.5em;}
+.swipe-hint::after{
+  content:"";
+  display:block;
+  width:1px;height:36px;
+  margin:1rem auto 0;
+  background:linear-gradient(to bottom,rgba(205,205,212,.55),transparent);
+}
+
+/* --- NEWS：煙の中から伸びる指輪の手 --- */
+.news{
+  overflow:hidden;
+  padding:3rem 1.5rem 4rem;
+  background:#060608;
+}
+.news::after{
+  content:"";
+  position:absolute;inset:0;z-index:0;
+  background:url("../LP_素材/darkart/news_hand.jpg") center 40%/cover no-repeat;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 48%,#000 50%,transparent 100%);
+          mask-image:radial-gradient(ellipse 75% 70% at 50% 48%,#000 50%,transparent 100%);
+  pointer-events:none;
+}
+.news > *{position:relative;z-index:1;}
+.news > .chapter:first-of-type{margin-bottom:9.5rem;}   /* 手が見える間 */
+.news .sec-title{font-size:1.25rem;letter-spacing:.42em;text-indent:.42em;}
+.news .sec-title::after{
+  width:1px;height:44px;
+  margin-top:2rem;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+}
+
+/* --- SHOPLIST：見出しの上に縦の銅線、カードは黒に沈める --- */
+.stores .chapter::before{
+  content:"";
+  display:block;
+  width:1px;height:48px;
+  margin:0 auto 1.6rem;
+  background:linear-gradient(to bottom,transparent,var(--gold));
+}
+.store-card{
+  background:rgba(6,6,8,.88);
+  border-color:rgba(255,255,255,.08);
+}
+.store-catch{letter-spacing:min(.24em,.7vw);}   /* 320px幅で「男た／ち」と折れないように */
+/* 2026-10-26 店舗写真を店内＋ロゴの横長写真へ差し替え（エソラ提供）。
+   旧写真はホストの顔に合わせて位置・明るさを個別調整していたので、中央基準に戻し横長のまま見せる */
+.store-photo{height:auto;aspect-ratio:4/3;}
+.store-photo img,
+.store-photo--create img,
+.store-photo--plus img{object-position:center 45%;filter:none;}
+.store-photo-grad{background:linear-gradient(to top,rgba(6,6,8,.95) 0%,rgba(6,6,8,0) 38%,rgba(6,6,8,0) 80%,rgba(6,6,8,.35) 100%);}
+/* 店舗紹介文：文の切れ目で改行（JSで「。」ごとに行、「、」ごとに折り返し単位を作る） */
+.store-copy{
+  text-align:center;
+  font-size:.82rem;
+  line-height:2.4;
+  letter-spacing:.06em;
+  color:#cfcfd4;
+}
+.store-copy .ph-line{display:block;}
+.store-copy .ph-line + .ph-line{margin-top:1.1em;}
+.ph{display:inline-block;}
+
+/* --- RECRUIT：扉の光 → 間 → 床の上から言葉が一連ずつ浮かぶ --- */
+.recruit{background:#060608;}
+.recruit-copy{
+  font-size:clamp(1.05rem,5.4vw,2rem);
+  letter-spacing:.18em;
+  text-indent:.18em;
+  white-space:nowrap;
+  margin-bottom:0;
+}
+/* 採用ページ（本文が長く扉の上に乗る）は扉を沈めて可読性を優先 */
+body.subpage .recruit-bg{filter:brightness(.4);}
+.recruit-door-gap{height:calc(min(100vw,640px) * 1.38 - 17rem);min-height:7rem;}
+.verse{
+  margin:0 auto 6rem;
+  text-align:center;
+  font-size:.95rem;
+  line-height:2.35;
+  letter-spacing:.14em;
+  color:#e4e4e8;
+}
+.verse p + p{margin-top:3.2em;}            /* 連の間の余韻 */
+.verse .recruit-sub{
+  font-size:1.02rem;
+  letter-spacing:.2em;
+  color:#f2f2f4;
+  margin-bottom:0;
+}
+.verse .verse-climax{
+  margin-top:6em;
+  font-size:1.3rem;
+  line-height:2.1;
+  letter-spacing:.36em;
+  text-indent:.36em;
+  background-image:var(--rose);
+  -webkit-background-clip:text;
+          background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+/* 一連ずつ、にじむように浮かぶ（通常のrevealより遅く） */
+.verse .reveal{
+  filter:blur(7px);
+  transform:translateY(14px);
+  transition:opacity 1.8s cubic-bezier(.16,1,.3,1),transform 1.8s cubic-bezier(.16,1,.3,1),filter 1.8s cubic-bezier(.16,1,.3,1);
+}
+.verse .reveal.on{filter:blur(0);transform:none;}
+.verse .verse-climax.reveal.on{filter:drop-shadow(0 6px 18px rgba(0,0,0,.7));}
+
+/* --- 黒い羽根（装飾。ゆっくり漂う） --- */
+.feather{
+  position:absolute;z-index:0;
+  width:30px;height:auto;
+  opacity:.42;
+  pointer-events:none;
+  animation:feather-drift 13s ease-in-out infinite;
+}
+.feather--n1{right:9%;top:16%;width:26px;transform:rotate(28deg);animation-delay:-4s;}
+.feather--s1{left:7%;top:5.5rem;width:34px;animation-delay:-2s;}
+.feather--s2{right:8%;top:2.5rem;width:24px;opacity:.3;animation-duration:16s;animation-delay:-9s;}
+.feather--r1{left:4%;top:calc(min(100vw,640px) * 1.05);width:28px;animation-delay:-6s;}
+.feather--r2{right:5%;top:calc(min(100vw,640px) * .9);width:20px;opacity:.3;animation-duration:17s;}
+@keyframes feather-drift{
+  0%  {translate:0 0;rotate:-14deg;}
+  50% {translate:12px 18px;rotate:10deg;}
+  100%{translate:0 0;rotate:-14deg;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .feather{animation:none;}
+  .verse .reveal{filter:none;transform:none;opacity:1;}
+}
+
+@media(min-width:768px){
+  .chapter-no{font-size:.9rem;}
+  .news{padding:7rem 2rem 7rem;}
+  .news::after{
+    left:50%;right:auto;width:min(100%,980px);
+    translate:-50% 0;
+  }
+  .news > .chapter:first-of-type{margin-bottom:15rem;}
+  /* 扉の画像は幅640pxで止まるので、PCでは左右の端も黒へ溶かす。
+     マスクの重ね合わせは旧Safariで要素ごと消える既知不具合があるため、楕円1枚で上下左右を溶かす */
+  .recruit-bg{
+    -webkit-mask-image:radial-gradient(ellipse 58% 72% at 50% 34%,#000 62%,transparent 100%);
+            mask-image:radial-gradient(ellipse 58% 72% at 50% 34%,#000 62%,transparent 100%);
+  }
+  .verse{font-size:1.02rem;}
+  .verse .verse-climax{font-size:1.6rem;}
+  .feather{width:40px;}
+  .feather--s1{left:16%;}
+  .feather--s2{right:17%;}
 }
