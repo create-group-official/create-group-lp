@@ -81,10 +81,11 @@ collections:
           - label: "店舗"
             name: "items"
             widget: "list"
+            allow_add: false  # 店舗ごとの固定の行。IDは変更不可なので行は追加しない（Astra R3）
             minimize_collapsed: true
             summary: "{{name}}"
             fields:
-              - { label: "内部ID（変更不可）", name: "id", widget: "string", read_only: true }
+              - { label: "内部ID（変更不可）", name: "id", widget: "string", readonly: true }
               - { label: "店舗名", name: "name", widget: "string" }
               - { label: "タグ（FLAGSHIP等）", name: "tag", widget: "string" }
               - { label: "キャッチコピー", name: "catch", widget: "string" }
@@ -109,10 +110,11 @@ collections:
           - label: "求人プラン（店舗別）"
             name: "plans"
             widget: "list"
+            allow_add: false  # 店舗ごとの固定の行。IDは変更不可なので行は追加しない（Astra R3）
             minimize_collapsed: true
             summary: "{{name}}"
             fields:
-              - { label: "店舗ID（変更不可）", name: "shop_id", widget: "string", read_only: true }
+              - { label: "店舗ID（変更不可）", name: "shop_id", widget: "string", readonly: true }
               - { label: "店舗名", name: "name", widget: "string" }
               - { label: "タグ", name: "tag", widget: "string" }
               - { label: "写真", name: "photo", widget: "image" }
