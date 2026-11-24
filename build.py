@@ -90,14 +90,23 @@ def render_links_footer_sns(links):
 
 def render_links_recruit_cta(links, recruit):
     # 募集主（職業安定法の募集広告の表示）は両店で共通なので、応募ボタンの直下に1行で静かに置く。
-    # 遠いフッターには追いやらない（大枠 v2.1「奥付の方針の補足」）。
+    # 遠いフッターには追いやらない。法定の表示は .reveal（初期 opacity:0・JS 待ち）の外に置く（Astra 11/24）。
     employer_html = ""
     if recruit.get("employer"):
         addr_line = f'<br>{esc(recruit["employer_address"])}' if recruit.get("employer_address") else ""
-        employer_html = f'\n      <p class="recruit-employer">募集主　{esc(recruit["employer"])}{addr_line}</p>'
+        employer_html = f'\n    <p class="recruit-employer">募集主　{esc(recruit["employer"])}{addr_line}</p>'
     return (
         '<div class="cta-row reveal">\n'
-        f'      <a class="btn" href="{esc(links["line_entry"])}" target="_blank" rel="noopener">Entry ／ 応募する</a>{employer_html}\n'
+        f'      <a class="btn" href="{esc(links["line_entry"])}" target="_blank" rel="noopener">Entry ／ 応募する</a>\n'
+        f'    </div>{employer_html}'
+    )
+
+
+def render_links_recruit_cta_top():
+    # トップからの応募は、募集の表示（6事項）がそろった求人ページを必ず通す（大枠 v2.1 A2）
+    return (
+        '<div class="cta-row reveal">\n'
+        '      <a class="btn" href="recruit.html#recruit-plans">Entry ／ 応募する</a>\n'
         '    </div>'
     )
 
@@ -222,8 +231,9 @@ def render_recruit_plans(recruit):
                 '\n          <dt>応募・お問い合わせ</dt>\n'
                 f'          <dd>電話 <a href="tel:{esc(tel_href)}">{esc(p["apply_tel"])}</a>／下のボタンから LINE</dd>'
             )
+        # 募集要項（報酬・業務内容・場所・応募電話）は法定の表示なので、演出（.reveal＝JS 待ちの opacity:0）を掛けない（Astra 11/24）
         cards.append(
-            '<div class="recruit-plan reveal">\n'
+            '<div class="recruit-plan">\n'
             '        <figure class="recruit-plan-photo">\n'
             f'          <img src="{esc(p["photo"])}" alt="{esc(p["name"])}" loading="lazy">\n'
             '        </figure>\n'
@@ -295,7 +305,7 @@ def render_jsonld_recruit(recruit):
         ],
     }
     blocks = ['<script type="application/ld+json">\n' + json.dumps(faq_data, ensure_ascii=False, indent=2) + '\n</script>']
-    for p in recruit["plans"]:
+    for p in (recruit["plans"] if EMIT_JOBPOSTING else []):
         addr = SHOP_ADDRESS[p["shop_id"]]
         job_data = {
             "@context": "https://schema.org",
@@ -335,9 +345,14 @@ def render_jsonld_recruit(recruit):
 # 🔴 2026-11-24 時点は店舗情報だけ先に公開し、求人の法定表示は募集主・契約形態の確認待ち。
 #    求人の修正を公開するときに ENFORCE_RECRUIT_LEGAL を True にし、
 #    募集主の名称・住所を recruit.json に入れたら REQUIRED_RECRUIT_FIELDS に加える。
-ENFORCE_RECRUIT_LEGAL = False
+ENFORCE_RECRUIT_LEGAL = True
 REQUIRED_PLAN_FIELDS = ("salary", "hours", "job", "workplace", "apply_tel")
-REQUIRED_RECRUIT_FIELDS = ()
+REQUIRED_RECRUIT_FIELDS = ("employer", "employer_address")
+
+# JobPosting（Google の求人枠）は、店別の求人詳細ページを作るまで出さない（Google は1ページ1求人。大枠 v2.1 A6）。
+# 再導入時：hiringOrganization＝募集主の会社名／employmentType は入れない（キイチ決定 11/24）／
+# datePosted＝募集主がその求人を最初に掲載した日。
+EMIT_JOBPOSTING = False
 
 
 def _blank(v):
@@ -345,9 +360,15 @@ def _blank(v):
     return not isinstance(v, str) or not v.strip()
 
 
+REQUIRED_SHOP_IDS = ("create", "plus")  # 募集している店。募集をやめる店が出たらここを直す
+
+
 def check_recruit_required(recruit):
     if not ENFORCE_RECRUIT_LEGAL:
         return
+    ids = [p.get("shop_id") for p in recruit.get("plans") or []]
+    if sorted(ids) != sorted(REQUIRED_SHOP_IDS):
+        raise ValueError(f"求人の店舗がそろっていません（欠け・重複）: {ids}")
     missing = [f"plans[{p.get('shop_id', '?')}].{k}" for p in recruit["plans"]
                for k in REQUIRED_PLAN_FIELDS if _blank(p.get(k))]
     missing += [k for k in REQUIRED_RECRUIT_FIELDS if _blank(recruit.get(k))]
@@ -367,6 +388,7 @@ def build_marker_renderers():
         "links:header-consult": render_links_header_consult(links),
         "links:footer-sns": render_links_footer_sns(links),
         "links:recruit-cta": render_links_recruit_cta(links, recruit),
+        "links:recruit-cta-top": render_links_recruit_cta_top(),
         "news": render_news(news),
         "closeup": render_closeup(closeup),
         "gallery": render_gallery(gallery),

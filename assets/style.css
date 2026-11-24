@@ -861,7 +861,7 @@ a.store-card:hover{border-color:var(--gold-soft);}
 
 /* ===== CTA ===== */
 .cta-row{text-align:center;margin-top:3rem;}
-.recruit-employer{margin-top:1.6rem;font-size:.72rem;color:var(--gray);letter-spacing:.08em;line-height:1.9;}
+.recruit-employer{margin-top:1.6rem;text-align:center;font-size:.78rem;color:var(--gray);letter-spacing:.08em;line-height:1.9;}
 .btn{
   display:inline-block;
   border:1px solid var(--gold);
