@@ -35,9 +35,19 @@ CUSTOM_DOMAIN = "create-group.co"
 MAX_IMAGE_WIDTH = 1600
 MAX_IMAGE_BYTES = 500_000
 
+# 営業時間・定休日はホスホス（host2.jp）の店舗ページに合わせる（2026-11-24 キイチ指示）。
+# 閉店は翌日の時刻で書く（25:00 ではなく 01:00）。
 SHOP_ADDRESS = {
-    "create": {"street": "栄4-10-2 第6オーシャンビル4F", "closes": "25:00"},
-    "plus": {"street": "栄4-11-1 アイランドビル1F", "closes": "24:30"},
+    "create": {
+        "street": "栄4-10-2 第6オーシャンビル4F",
+        "closes": "01:00",
+        "days": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],  # 月曜定休
+    },
+    "plus": {
+        "street": "栄4-11-1 アイランドビル1F",
+        "closes": "01:00",
+        "days": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],  # 水曜定休
+    },
 }
 JOBPOSTING_IDENTIFIER = {"create": "create-host", "plus": "create-plus-host"}
 JOBPOSTING_DESC = {
@@ -78,10 +88,16 @@ def render_links_footer_sns(links):
     )
 
 
-def render_links_recruit_cta(links):
+def render_links_recruit_cta(links, recruit):
+    # 募集主（職業安定法の募集広告の表示）は両店で共通なので、応募ボタンの直下に1行で静かに置く。
+    # 遠いフッターには追いやらない（大枠 v2.1「奥付の方針の補足」）。
+    employer_html = ""
+    if recruit.get("employer"):
+        addr_line = f'<br>{esc(recruit["employer_address"])}' if recruit.get("employer_address") else ""
+        employer_html = f'\n      <p class="recruit-employer">募集主　{esc(recruit["employer"])}{addr_line}</p>'
     return (
         '<div class="cta-row reveal">\n'
-        f'      <a class="btn" href="{esc(links["line_entry"])}" target="_blank" rel="noopener">Entry ／ 応募する</a>\n'
+        f'      <a class="btn" href="{esc(links["line_entry"])}" target="_blank" rel="noopener">Entry ／ 応募する</a>{employer_html}\n'
         '    </div>'
     )
 
@@ -189,6 +205,23 @@ def render_recruit_plans(recruit):
             f'\n          <dt>待遇</dt>\n          <dd>{esc(p["benefits"])}</dd>'
             if p.get("benefits") else ""
         )
+        # 職業安定法の募集広告の表示（業務内容・就業場所・募集主・連絡先）。
+        # 空欄の項目は出さない（ましろが一時的に消しても壊れないように）。
+        job_html = (
+            f'\n          <dt>業務内容</dt>\n          <dd>{esc(p["job"])}</dd>'
+            if p.get("job") else ""
+        )
+        place_html = (
+            f'\n          <dt>就業場所</dt>\n          <dd>{esc(p["workplace"])}</dd>'
+            if p.get("workplace") else ""
+        )
+        tel_html = ""
+        if p.get("apply_tel"):
+            tel_href = p.get("apply_tel_href") or re.sub(r"\D", "", p["apply_tel"])
+            tel_html = (
+                '\n          <dt>応募・お問い合わせ</dt>\n'
+                f'          <dd>電話 <a href="tel:{esc(tel_href)}">{esc(p["apply_tel"])}</a>／下のボタンから LINE</dd>'
+            )
         cards.append(
             '<div class="recruit-plan reveal">\n'
             '        <figure class="recruit-plan-photo">\n'
@@ -198,13 +231,13 @@ def render_recruit_plans(recruit):
             f'        <p class="plan-tag">{esc(p["tag"])}</p>\n'
             '        <dl>\n'
             '          <dt>給与</dt>\n'
-            f'          <dd>{esc(p["salary"])}</dd>{benefits_html}\n'
+            f'          <dd>{esc(p["salary"])}</dd>{benefits_html}{job_html}{place_html}\n'
             '          <dt>勤務</dt>\n'
             f'          <dd>{esc(p["hours"])}</dd>\n'
             '          <dt>応募資格</dt>\n'
             f'          <dd>{esc(p["qualification"])}</dd>\n'
             '          <dt>育成</dt>\n'
-            f'          <dd>{esc(p["training"])}</dd>\n'
+            f'          <dd>{esc(p["training"])}</dd>{tel_html}\n'
             '        </dl>\n'
             '      </div>'
         )
@@ -242,7 +275,7 @@ def render_jsonld_nightclubs(shops):
             },
             "openingHoursSpecification": [{
                 "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                "dayOfWeek": addr["days"],
                 "opens": "20:00",
                 "closes": addr["closes"],
             }],
@@ -275,7 +308,7 @@ def render_jsonld_recruit(recruit):
             "employmentType": "OTHER",
             "hiringOrganization": {
                 "@type": "Organization",
-                "name": p["name"],
+                "name": recruit.get("employer") or p["name"],
                 "sameAs": "https://create-group.co/shoplist.html",
             },
             "jobLocation": {
@@ -298,17 +331,42 @@ def render_jsonld_recruit(recruit):
     return "\n".join(blocks)
 
 
+# 求人に必ず載せる項目（職業安定法の募集広告の表示）。CMS で空にされたら公開を止める。
+# 🔴 2026-11-24 時点は店舗情報だけ先に公開し、求人の法定表示は募集主・契約形態の確認待ち。
+#    求人の修正を公開するときに ENFORCE_RECRUIT_LEGAL を True にし、
+#    募集主の名称・住所を recruit.json に入れたら REQUIRED_RECRUIT_FIELDS に加える。
+ENFORCE_RECRUIT_LEGAL = False
+REQUIRED_PLAN_FIELDS = ("salary", "hours", "job", "workplace", "apply_tel")
+REQUIRED_RECRUIT_FIELDS = ()
+
+
+def _blank(v):
+    # None・数値・空白だけの文字列も「空」とみなす（str(None) == "None" を通さない）
+    return not isinstance(v, str) or not v.strip()
+
+
+def check_recruit_required(recruit):
+    if not ENFORCE_RECRUIT_LEGAL:
+        return
+    missing = [f"plans[{p.get('shop_id', '?')}].{k}" for p in recruit["plans"]
+               for k in REQUIRED_PLAN_FIELDS if _blank(p.get(k))]
+    missing += [k for k in REQUIRED_RECRUIT_FIELDS if _blank(recruit.get(k))]
+    if missing:
+        raise ValueError(f"求人の必須項目が空です（法定表示）: {missing}")
+
+
 def build_marker_renderers():
     links = load_json("links")
     shops = load_json("shops")["items"]
     recruit = load_json("recruit")
+    check_recruit_required(recruit)
     news = load_json("news")["items"]
     closeup = load_json("closeup")["items"]
     gallery = load_json("gallery")["items"]
     return {
         "links:header-consult": render_links_header_consult(links),
         "links:footer-sns": render_links_footer_sns(links),
-        "links:recruit-cta": render_links_recruit_cta(links),
+        "links:recruit-cta": render_links_recruit_cta(links, recruit),
         "news": render_news(news),
         "closeup": render_closeup(closeup),
         "gallery": render_gallery(gallery),

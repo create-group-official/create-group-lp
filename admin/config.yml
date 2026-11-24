@@ -125,6 +125,10 @@ collections:
               - { label: "応募資格", name: "qualification", widget: "text" }
               - { label: "育成・研修", name: "training", widget: "text" }
               - { label: "待遇（任意）", name: "benefits", widget: "text", required: false }
+              - { label: "業務内容（法定表示）", name: "job", widget: "string", required: false, hint: "職業安定法で求人に必ず載せる項目（準備中・Kuroが入れる）" }
+              - { label: "就業場所（法定表示）", name: "workplace", widget: "string", required: false, hint: "職業安定法で求人に必ず載せる項目（準備中・Kuroが入れる）" }
+              - { label: "応募の電話番号（法定表示）", name: "apply_tel", widget: "string", required: false, hint: "LINEだけでは足りないため電話を載せる（準備中・Kuroが入れる）" }
+              - { label: "応募の電話番号（ハイフンなし・発信用）", name: "apply_tel_href", widget: "string", required: false }
           - label: "よくある質問（FAQ）"
             name: "faq"
             widget: "list"
@@ -133,6 +137,8 @@ collections:
             fields:
               - { label: "質問", name: "q", widget: "string" }
               - { label: "回答", name: "a", widget: "text" }
+          - { label: "募集主の名称（法定表示・両店共通）", name: "employer", widget: "string", required: false, hint: "職業安定法で求人に必ず載せる項目。応募ボタンの下に出る。消さない" }
+          - { label: "募集主の住所（法定表示）", name: "employer_address", widget: "string", required: false, hint: "ビル名・階まで書く。消さない" }
           - { label: "求人公開日", name: "job_posted_date", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
           - { label: "求人有効期限", name: "job_valid_through", widget: "datetime", type: "date", format: "YYYY-MM-DD" }
 
