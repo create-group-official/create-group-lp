@@ -254,6 +254,18 @@ def render_recruit_plans(recruit):
     return "\n      ".join(cards)
 
 
+def render_trial_places(recruit):
+    # 体験入店のページの「場所・応募先」。店名・就業場所・応募電話は recruit.json から出す（二重管理しない）
+    rows = []
+    for p in recruit["plans"]:
+        tel_href = p.get("apply_tel_href") or re.sub(r"\D", "", p.get("apply_tel", ""))
+        rows.append(
+            f'<dt>場所・応募先（{esc(p["name"])}）</dt>\n'
+            f'          <dd>{esc(p.get("workplace", p["name"]))}<br>電話 <a href="tel:{esc(tel_href)}">{esc(p.get("apply_tel", ""))}</a></dd>'
+        )
+    return "\n          ".join(rows)
+
+
 def render_recruit_faq(recruit):
     items = [
         '<div class="faq-item">\n'
@@ -396,6 +408,7 @@ def build_marker_renderers():
         "shops-full": render_shops_full(shops),
         "recruit-plans": render_recruit_plans(recruit),
         "recruit-faq": render_recruit_faq(recruit),
+        "trial-places": render_trial_places(recruit),
         "jsonld-nightclubs": render_jsonld_nightclubs(shops),
         "jsonld-recruit": render_jsonld_recruit(recruit),
     }

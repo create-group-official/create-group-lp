@@ -861,6 +861,9 @@ a.store-card:hover{border-color:var(--gold-soft);}
 
 /* ===== CTA ===== */
 .cta-row{text-align:center;margin-top:3rem;}
+.page-h1{margin:0 auto 3rem;text-align:center;font-weight:300;font-size:1rem;letter-spacing:.2em;line-height:2;color:#e2e2e2;}
+.trial-link{margin-top:2.4rem;text-align:center;font-size:.82rem;letter-spacing:.08em;}
+.trial-link a{color:#e2e2e2;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:.2em;}
 .recruit-employer{margin-top:1.6rem;text-align:center;font-size:.78rem;color:var(--gray);letter-spacing:.08em;line-height:1.9;}
 .btn{
   display:inline-block;
