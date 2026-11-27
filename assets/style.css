@@ -158,7 +158,8 @@ section{padding:1.5rem 1.5rem;position:relative;}
 /* ハンバーガーメニューボタン（モバイルのみ表示） */
 .nav-toggle{
   position:absolute;
-  top:50%;right:.9rem;
+  /* 上段の帯（.site-brand・高さ約52px）の中央に固定。50%だとメニューを開いたときヘッダー全体の中央（ShopListの横）へ下がる */
+  top:26px;right:.9rem;
   transform:translateY(-50%);
   width:30px;height:30px;
   display:flex;flex-direction:column;justify-content:center;align-items:center;
